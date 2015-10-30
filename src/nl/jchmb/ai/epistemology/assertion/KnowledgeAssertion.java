@@ -1,4 +1,4 @@
-package nl.jchmb.ai.epistemology.logic;
+package nl.jchmb.ai.epistemology.assertion;
 
 import nl.jchmb.ai.epistemology.Model;
 
@@ -10,19 +10,19 @@ import nl.jchmb.ai.epistemology.Model;
  * @param <A>
  * @param <W>
  */
-public class Knowledge<A, W> implements Assertion<A, W> {
+public class KnowledgeAssertion<A, W> implements Assertion<A, W> {
 
 	private A agent;
 	private Assertion<A, W> f;
 	
-	public Knowledge(A agent, Assertion<A, W> f) {
+	public KnowledgeAssertion(A agent, Assertion<A, W> f) {
 		this.agent = agent;
 		this.f = f;
 	}
 	
 	@Override
 	public boolean resolve(Model<A, W> model, W world) {
-		for (W possibleWorld : model.getAccessibility().iterate(agent, world)) {
+		for (W possibleWorld : model.getAccessibility().iterate(model, agent, world)) {
 			if (!f.resolve(model, possibleWorld)) {
 				return false;
 			}

@@ -1,4 +1,4 @@
-package nl.jchmb.ai.epistemology.logic;
+package nl.jchmb.ai.epistemology.assertion;
 
 import nl.jchmb.ai.epistemology.Model;
 
