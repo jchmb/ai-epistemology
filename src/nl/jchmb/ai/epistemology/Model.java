@@ -1,17 +1,18 @@
 package nl.jchmb.ai.epistemology;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
 import nl.jchmb.ai.epistemology.assertion.Assertion;
 
 public class Model<A, W> {
-	private Set<A> agents;
+	private Collection<A> agents;
 	private Collection<W> universe;
 	private W actualWorld;
 	private Accessibility<A, W> accessibility;
 	
-	public Model(Set<A> agents, Collection<W> universe, W actualWorld, Accessibility<A, W> accessibility) {
+	public Model(Collection<A> agents, Collection<W> universe, W actualWorld, Accessibility<A, W> accessibility) {
 		this.agents = agents;
 		this.universe = universe;
 		this.actualWorld = actualWorld;
@@ -22,7 +23,7 @@ public class Model<A, W> {
 		return actualWorld;
 	}
 	
-	public Set<A> getAgents() {
+	public Collection<A> getAgents() {
 		return agents;
 	}
 	
@@ -36,5 +37,15 @@ public class Model<A, W> {
 	
 	public boolean models(W world, Assertion<A, W> formula) {
 		return formula.resolve(this, world);
+	}
+	
+	public void announce(Assertion<A, W> assertion) {
+		Collection<W> newUniverse = new ArrayList<W>();
+		for (W world : universe) {
+			if (models(world, assertion)) {
+				newUniverse.add(world);
+			}
+		}
+		universe = newUniverse;
 	}
 }

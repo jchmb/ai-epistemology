@@ -12,7 +12,7 @@ import nl.jchmb.ai.epistemology.Model;
 public class PreferenceModel<A, W> extends Model<A, W> {
 	private Map<A, Comparator<W>> preferences;
 	
-	public PreferenceModel(Set<A> agents, Collection<W> universe,
+	public PreferenceModel(Collection<A> agents, Collection<W> universe,
 			Accessibility<A, W> accessibility, W actualWorld, Map<A, Comparator<W>> preferences) {
 		super(agents, universe, actualWorld, accessibility);
 		this.preferences = preferences;

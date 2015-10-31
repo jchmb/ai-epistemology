@@ -8,16 +8,16 @@ import nl.jchmb.ai.epistemology.Model;
 import nl.jchmb.ai.epistemology.assertion.Assertion;
 
 /**
- * Lexiographic upgrade operator. Promotes all worlds w1 where p to be preferred over all worlds w2 where not-p.
+ * Lexicographic upgrade operator. Promotes all worlds w1 where p to be preferred over all worlds w2 where not-p.
  * Within those two separate sets, the old ordering remains.
  * 
  * @param <A>
  * @param <W>
  */
-public class LexiographicUpgrader<A, W> implements Revisor<A, W> {
+public class LexicographicUpgrader<A, W> implements Revisor<A, W> {
 	private Assertion<A, W> assertion;
 	
-	public LexiographicUpgrader(Assertion<A, W> assertion) {
+	public LexicographicUpgrader(Assertion<A, W> assertion) {
 		this.assertion = assertion;
 	}
 	
@@ -29,14 +29,14 @@ public class LexiographicUpgrader<A, W> implements Revisor<A, W> {
 				preferred.add(world);
 			}
 		}
-		return new LexiographicUpgradedComparator<W>(preferred, preference);
+		return new LexicographicUpgradedComparator<W>(preferred, preference);
 	}
 	
-	private class LexiographicUpgradedComparator<W> implements Comparator<W> {
+	private class LexicographicUpgradedComparator<W> implements Comparator<W> {
 		private Set<W> preferred;
 		private Comparator<W> baseComparator;
 		
-		public LexiographicUpgradedComparator(Set<W> preferred, Comparator<W> baseComparator) {
+		public LexicographicUpgradedComparator(Set<W> preferred, Comparator<W> baseComparator) {
 			this.preferred = preferred;
 			this.baseComparator = baseComparator;
 		}
